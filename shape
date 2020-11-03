@@ -26,7 +26,7 @@ if (length $MAGICK == 0) {
     exit(1);
   }
 } else {
-  @magick_args = ("gm", "convert", "-", "-trim", $TMPFILE);
+  @magick_args = ("gm", "convert", "-", "-trim","-mattecolor","#fff", "-frame", "25x25", $TMPFILE);
 }
 
 my @shape_args = @ARGV;
