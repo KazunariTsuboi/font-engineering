@@ -3,11 +3,15 @@ use IPC::Run qw(run);
 my $TMPFILE = "/tmp/shape.png";
 my @imgcat_args, @magick_args;
 
-if ($ENV{TERM} == "xterm-kitty") {
+if ($ENV{TERMINAL} == "xterm-256color") {
+  @imgcat_args = ("img2sixel", $TMPFILE);
+} elsif ($ENV{TERM} == "xterm-kitty") {
   @imgcat_args = ("kitty", "+icat", $TMPFILE);
 } elsif ($ENV{TERMINAL} == "iTerm.app") {
   @imgcat_args = ("imgcat", $TMPFILE);
-} else {
+#if ($ENV{TERM} == "xterm-256color") {
+#  @imgcat_args = ("img2sixel", $TMPFILE);
+#} else {
   print STDERR ("Your terminal seems unsupported. Are you using iTerm2 or " .
                 "Kovid Goyal's TTY (`kitty`)?\n");
   exit(1);
